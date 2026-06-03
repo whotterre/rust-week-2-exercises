@@ -51,6 +51,7 @@ pub fn classify_script(script: &[u8]) -> ScriptType {
 }
 
 // complete Outpoint tuple struct
+// :)
 pub struct Outpoint(pub String, pub i32);
 
 pub fn read_pushdata(script: &[u8]) -> &[u8] {
