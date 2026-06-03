@@ -26,7 +26,9 @@ pub fn swap_endian_u32(num: u32) -> [u8; 4] {
 }
 
 pub fn parse_satoshis(input: &str) -> Result<u64, String> {
-    // TODO: Parse input string to u64, return error string if invalid
+    // Parse input string to u64, return error string if invalid
+    let res = input.parse::<u64>().map_err(|e| e.to_string());
+    res
 }
 
 pub enum ScriptType {
