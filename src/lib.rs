@@ -1,3 +1,5 @@
+use std::default;
+
 use hex::{decode, encode};
 
 pub fn decode_hex(hex_str: &str) -> Result<Vec<u8>, String> {
@@ -83,7 +85,8 @@ pub fn move_txid(txid: String) -> String {
     format!("txid:{}", txid)
 }
 
-// TODO: Add necessary derive traits
+// Add necessary derive traits
+#[derive(Debug)]
 pub enum Opcode {
     OpChecksig,
     OpDup,
@@ -92,7 +95,13 @@ pub enum Opcode {
 
 impl Opcode {
     pub fn from_byte(byte: u8) -> Result<Self, String> {
-        // TODO: Implement mapping from byte to Opcode variant
+        // Implement mapping from byte to Opcode variant
+        match byte {
+            0xAC => Ok(Opcode::OpChecksig),
+            0x76 => Ok(Opcode::OpDup),
+            0xFF => Ok(Opcode::OpInvalid),
+            _ => Ok(Opcode::OpInvalid)
+        }
     }
 }
 
