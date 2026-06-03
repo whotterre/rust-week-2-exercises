@@ -74,8 +74,8 @@ impl Wallet for TestWallet {
 }
 
 pub fn apply_fee(balance: &mut u64, fee: u64) {
-    // TODO: Subtract fee from mutable balance reference
-    TestWallet
+    // Subtract fee from mutable balance reference
+    *balance -= fee
 }
 
 pub fn move_txid(txid: String) -> String {
