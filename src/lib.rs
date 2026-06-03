@@ -38,7 +38,16 @@ pub enum ScriptType {
 }
 
 pub fn classify_script(script: &[u8]) -> ScriptType {
-    // TODO: Match script pattern and return corresponding ScriptType
+    // Match script pattern and return corresponding ScriptType
+    if script[0] == 0x76u8 && script[1] == 0xa9u8 {
+        ScriptType::P2PKH
+    } else if script[0] == 0xa9u8 {
+        ScriptType::P2WPKH
+    } else if script.len() == 0 {
+        ScriptType::Unknown
+    } else {
+        ScriptType::Unknown
+    }
 }
 
 // TODO: complete Outpoint tuple struct
