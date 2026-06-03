@@ -54,7 +54,8 @@ pub fn classify_script(script: &[u8]) -> ScriptType {
 pub struct Outpoint(&'static str, i32); // the static allows the str to last throughout the program's lifetime
 
 pub fn read_pushdata(script: &[u8]) -> &[u8] {
-    // TODO: Return the pushdata portion of the script slice (assumes pushdata starts at index 2)
+    // Return the pushdata portion of the script slice (assumes pushdata starts at index 2)
+    return &script[2..];
 }
 
 pub trait Wallet {
