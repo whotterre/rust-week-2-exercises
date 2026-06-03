@@ -12,6 +12,7 @@ pub fn to_big_endian(bytes: &[u8]) -> Vec<u8> {
 }
 pub fn bytes_to_hex(bytes: &[u8]) -> String {
     // TODO: Implement conversion of bytes slice to hex string
+    hex::encode(bytes).to_string()
 }
 
 pub fn hex_to_bytes(hex: &str) -> Result<Vec<u8>, hex::FromHexError> {
