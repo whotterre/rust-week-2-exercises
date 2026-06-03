@@ -1,27 +1,27 @@
 use hex::{decode, encode};
 
 pub fn decode_hex(hex_str: &str) -> Result<Vec<u8>, String> {
-    // TODO: Decode hex string into Vec<u8>, return error string on failure
+    // Decode hex string into Vec<u8>, return error string on failure
      hex::decode(hex_str).map_err(|err| err.to_string())
 }
 
 pub fn to_big_endian(bytes: &[u8]) -> Vec<u8> {
-    // TODO: Reverse the byte order of input slice and return as Vec<u8>
+    // Reverse the byte order of input slice and return as Vec<u8>
     let reversed: Vec<u8> = bytes.iter().rev().copied().collect();
     reversed
 }
 pub fn bytes_to_hex(bytes: &[u8]) -> String {
-    // TODO: Implement conversion of bytes slice to hex string
+    // Implement conversion of bytes slice to hex string
     hex::encode(bytes).to_string()
 }
 
 pub fn hex_to_bytes(hex: &str) -> Result<Vec<u8>, hex::FromHexError> {
-    // TODO: Implement conversion of hex string to bytes vector
+    // Implement conversion of hex string to bytes vector
       hex::decode(hex)
 }
 
 pub fn swap_endian_u32(num: u32) -> [u8; 4] {
-    // TODO: Implement little-endian byte swap for u32
+    // Implement little-endian byte swap for u32
     u32::to_le_bytes(num)
 }
 
