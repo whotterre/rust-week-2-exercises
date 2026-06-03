@@ -1,6 +1,4 @@
-use std::default;
-
-use hex::{decode, encode};
+use hex;
 
 pub fn decode_hex(hex_str: &str) -> Result<Vec<u8>, String> {
     // Decode hex string into Vec<u8>, return error string on failure
@@ -105,7 +103,8 @@ impl Opcode {
     }
 }
 
-// TODO: Add necessary derive traits
+// Add necessary derive traits
+#[derive(Debug)]
 pub struct UTXO {
     pub txid: Vec<u8>,
     pub vout: u32,
@@ -113,5 +112,8 @@ pub struct UTXO {
 }
 
 pub fn consume_utxo(utxo: UTXO) -> UTXO {
-    // TODO: Implement UTXO consumption logic (if any)
+    // Implement UTXO consumption logic (if any)
+    let UTXO{ txid, vout, value } = utxo;
+
+    UTXO { txid, vout, value }
 }
