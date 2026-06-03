@@ -51,7 +51,7 @@ pub fn classify_script(script: &[u8]) -> ScriptType {
 }
 
 // complete Outpoint tuple struct
-pub struct Outpoint(&'static str, i32); // the static allows the str to last throughout the program's lifetime
+pub struct Outpoint(pub String, pub i32);
 
 pub fn read_pushdata(script: &[u8]) -> &[u8] {
     // Return the pushdata portion of the script slice (assumes pushdata starts at index 2)
