@@ -2,7 +2,7 @@ use hex;
 
 pub fn decode_hex(hex_str: &str) -> Result<Vec<u8>, String> {
     // Decode hex string into Vec<u8>, return error string on failure
-     hex::decode(hex_str).map_err(|err| err.to_string())
+    hex::decode(hex_str).map_err(|err| err.to_string())
 }
 
 pub fn to_big_endian(bytes: &[u8]) -> Vec<u8> {
@@ -17,7 +17,7 @@ pub fn bytes_to_hex(bytes: &[u8]) -> String {
 
 pub fn hex_to_bytes(hex: &str) -> Result<Vec<u8>, hex::FromHexError> {
     // Implement conversion of hex string to bytes vector
-      hex::decode(hex)
+    hex::decode(hex)
 }
 
 pub fn swap_endian_u32(num: u32) -> [u8; 4] {
@@ -99,7 +99,7 @@ impl Opcode {
             0xAC => Ok(Opcode::OpChecksig),
             0x76 => Ok(Opcode::OpDup),
             0xFF => Ok(Opcode::OpInvalid),
-            _ => Ok(Opcode::OpInvalid)
+            _ => Ok(Opcode::OpInvalid),
         }
     }
 }
@@ -114,7 +114,7 @@ pub struct UTXO {
 
 pub fn consume_utxo(utxo: UTXO) -> UTXO {
     // Implement UTXO consumption logic (if any)
-    let UTXO{ txid, vout, value } = utxo;
+    let UTXO { txid, vout, value } = utxo;
 
     UTXO { txid, vout, value }
 }
