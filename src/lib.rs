@@ -27,8 +27,9 @@ pub fn swap_endian_u32(num: u32) -> [u8; 4] {
 
 pub fn parse_satoshis(input: &str) -> Result<u64, String> {
     // Parse input string to u64, return error string if invalid
-    let res = input.parse::<u64>().map_err(|e| e.to_string());
-    res
+    input
+        .parse::<u64>()
+        .map_err(|_| String::from("Invalid satoshi amount"))
 }
 
 pub enum ScriptType {
@@ -39,12 +40,10 @@ pub enum ScriptType {
 
 pub fn classify_script(script: &[u8]) -> ScriptType {
     // Match script pattern and return corresponding ScriptType
-    if script[0] == 0x76u8 && script[1] == 0xa9u8 {
+    if script.len() >= 3 && script[0] == 0x76u8 && script[1] == 0xa9u8 {
         ScriptType::P2PKH
-    } else if script[0] == 0xa9u8 {
+    } else if script.len() >= 3 && script[0] == 0x00u8 && script[1] == 0x14u8 {
         ScriptType::P2WPKH
-    } else if script.len() == 0 {
-        ScriptType::Unknown
     } else {
         ScriptType::Unknown
     }
@@ -81,7 +80,7 @@ pub fn apply_fee(balance: &mut u64, fee: u64) {
 
 pub fn move_txid(txid: String) -> String {
     // Return formatted string including the txid for display or logging
-    format!("txid:{}", txid)
+    format!("txid: {}", txid)
 }
 
 // Add necessary derive traits
@@ -98,8 +97,7 @@ impl Opcode {
         match byte {
             0xAC => Ok(Opcode::OpChecksig),
             0x76 => Ok(Opcode::OpDup),
-            0xFF => Ok(Opcode::OpInvalid),
-            _ => Ok(Opcode::OpInvalid),
+            _ => Err(format!("Invalid opcode: 0x{:02x}", byte)),
         }
     }
 }
@@ -114,7 +112,5 @@ pub struct UTXO {
 
 pub fn consume_utxo(utxo: UTXO) -> UTXO {
     // Implement UTXO consumption logic (if any)
-    let UTXO { txid, vout, value } = utxo;
-
-    UTXO { txid, vout, value }
+    utxo
 }
